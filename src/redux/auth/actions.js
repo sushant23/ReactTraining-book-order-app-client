@@ -15,7 +15,7 @@ export const login = (data, history) => {
         history.push(defaultStartPath);
       })
       .catch(err => {
-        dispatch(loginError(err.response.data.message));
+        dispatch(loginError(err.message));
       });
   };
 };
