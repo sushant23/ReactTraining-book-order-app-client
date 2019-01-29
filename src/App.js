@@ -5,10 +5,12 @@ import {
   Redirect,
   Switch
 } from "react-router-dom";
+import { Provider } from 'react-redux';
 import "./App.css";
 import Login from "./pages/login";
 import { startPath as defaultStartPath } from "./constants/defaultValues";
 import MainRoute from "./MainRoute";
+import { configureStore } from "./redux/store";
 
 const AuthenticatedRoute = ({ user, component: Component, ...rest }) => (
   <Route
@@ -44,17 +46,19 @@ class App extends Component {
   render() {
     const { user } = this.props;
     return (
-      <Router>
-        <Switch>
-          <AuthenticatedRoute
-            user={user}
-            component={MainRoute}
-            path={defaultStartPath}
-          />
-          <NonAuthOnlyRoute path="/login" component={Login} user={user} />
-          <Redirect to={defaultStartPath} />
-        </Switch>
-      </Router>
+      <Provider store={configureStore()}>
+        <Router>
+          <Switch>
+            <AuthenticatedRoute
+              user={user}
+              component={MainRoute}
+              path={defaultStartPath}
+            />
+            <NonAuthOnlyRoute path="/login" component={Login} user={user} />
+            <Redirect to={defaultStartPath} />
+          </Switch>
+        </Router>
+      </Provider>
     );
   }
 }
