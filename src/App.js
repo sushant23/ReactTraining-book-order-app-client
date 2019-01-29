@@ -47,13 +47,12 @@ class App extends Component {
     return (
       <Router>
         <Switch>
+          <NonAuthOnlyRoute path="/login" exact component={Login} user={user} />
           <AuthenticatedRoute
             user={user}
             component={MainRoute}
-            path={defaultStartPath}
+            path='/'
           />
-          <NonAuthOnlyRoute path="/login" component={Login} user={user} />
-          <Redirect to={defaultStartPath} />
         </Switch>
       </Router>
     );
