@@ -1,12 +1,12 @@
 import React from "react";
 import { Form as FinalForm, Field } from "react-final-form";
 
-import { Container, Col, Form, Button } from "reactstrap";
+import { Container, Col, Form, Button, Alert } from "reactstrap";
 import { connect } from "react-redux";
 import "./Login.css";
 import Input from "../../final-form-components/Input";
 import { isValidEmail } from "../../util";
-import {login as loginAction} from '../../redux/actions';
+import { login as loginAction } from "../../redux/actions";
 
 const validate = values => {
   const errors = {};
@@ -21,14 +21,19 @@ const validate = values => {
   return errors;
 };
 
-const Login = ({ login }) => (
+const Login = ({ login, history, loginError }) => (
   <Container className="login">
     <h2>Sign In</h2>
     <FinalForm
-      onSubmit={login}
+      onSubmit={values => login(values, history)}
       validate={validate}
       render={({ handleSubmit }) => (
         <Form className="form" onSubmit={handleSubmit}>
+          {loginError && (
+            <Alert color="danger" className="rounded">
+              {loginError}
+            </Alert>
+          )}
           <Col>
             <Field component={Input} name="email" type="email" />
           </Col>
@@ -43,6 +48,9 @@ const Login = ({ login }) => (
 );
 
 export default connect(
-  null,
+  ({ auth }) => {
+    const { loginError } = auth;
+    return { loginError };
+  },
   { login: loginAction }
 )(Login);
