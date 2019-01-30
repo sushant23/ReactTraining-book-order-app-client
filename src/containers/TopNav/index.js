@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { logout as logoutAction } from "../../redux/actions";
 
 const TopNav = ({ logout }) => (
-  <Navbar fixed>
+  <Navbar>
     <NavbarBrand href="/">Book Order App</NavbarBrand>
     <Nav className="ml-auto">
       <NavItem>

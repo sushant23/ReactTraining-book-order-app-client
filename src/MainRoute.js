@@ -7,6 +7,10 @@ import Books from "./pages/Books";
 import CreateBook from "./pages/CreateBook";
 import EditBook from "./pages/EditBook";
 import BookDetail from "./pages/BookDetail";
+import Orders from "./pages/Orders";
+import CreateOrder from "./pages/CreateOrder";
+import EditOrder from "./pages/EditOrder";
+import OrderDetail from "./pages/OrderDetail";
 
 const MainRoute = ({ match }) => {
   return (
@@ -17,22 +21,22 @@ const MainRoute = ({ match }) => {
           <Route
             path={`${match.url}order`}
             exact
-            component={() => <div>Order</div>}
+            component={Orders}
           />
           <Route
             path={`${match.url}order/create`}
             exact
-            component={() => <div>Create Order</div>}
+            component={CreateOrder}
           />
           <Route
             path={`${match.url}order/:id/edit`}
             exact
-            component={() => <div>Edit Order</div>}
+            component={EditOrder}
           />
           <Route
             path={`${match.url}order/:id`}
             exact
-            component={() => <div>Order Detail</div>}
+            component={OrderDetail}
           />
           <Route path={`${match.url}book`} exact component={Books} />
           <Route
